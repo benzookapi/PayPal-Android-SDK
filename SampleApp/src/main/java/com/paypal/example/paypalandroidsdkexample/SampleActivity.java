@@ -45,10 +45,12 @@ public class SampleActivity extends Activity {
      * - Set to PayPalConfiguration.ENVIRONMENT_NO_NETWORK to kick the tires
      * without communicating to PayPal's servers.
      */
-    private static final String CONFIG_ENVIRONMENT = PayPalConfiguration.ENVIRONMENT_NO_NETWORK;
+    //private static final String CONFIG_ENVIRONMENT = PayPalConfiguration.ENVIRONMENT_NO_NETWORK;
+    private static final String CONFIG_ENVIRONMENT = PayPalConfiguration.ENVIRONMENT_SANDBOX;
+    //private static final String CONFIG_ENVIRONMENT = PayPalConfiguration.ENVIRONMENT_PRODUCTION;
 
     // note that these credentials will differ between live & sandbox environments.
-    private static final String CONFIG_CLIENT_ID = "credential from developer.paypal.com";
+    private static final String CONFIG_CLIENT_ID = "Acz3G7kG9afqvZF7PJNw-hZvw_F9INQPnZGnSVbclnydHjpK53GxFkW67Wf76FbR8ZzbW_RB3Rznnckq";
 
     private static final int REQUEST_CODE_PAYMENT = 1;
     private static final int REQUEST_CODE_FUTURE_PAYMENT = 2;
