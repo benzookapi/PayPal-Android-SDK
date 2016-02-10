@@ -101,7 +101,7 @@ public class SampleActivity extends Activity {
     }
     
     private PayPalPayment getThingToBuy(String paymentIntent) {
-        return new PayPalPayment(new BigDecimal("1.75"), "USD", "sample item",
+        return new PayPalPayment(new BigDecimal("100"), "JPY", "アンドロイド商品",
                 paymentIntent);
     }
     
@@ -112,19 +112,19 @@ public class SampleActivity extends Activity {
         //--- include an item list, payment amount details
         PayPalItem[] items =
             {
-                    new PayPalItem("sample item #1", 2, new BigDecimal("87.50"), "USD",
+                    new PayPalItem("アンドロイド商品 #1", 2, new BigDecimal("87"), "JPY",
                             "sku-12345678"),
-                    new PayPalItem("free sample item #2", 1, new BigDecimal("0.00"),
-                            "USD", "sku-zero-price"),
-                    new PayPalItem("sample item #3 with a longer name", 6, new BigDecimal("37.99"),
-                            "USD", "sku-33333") 
+                    new PayPalItem("無料アンドロイド商品 #2", 1, new BigDecimal("0"),
+                            "JPY", "sku-zero-price"),
+                    new PayPalItem("アンドロイド商品 #3 長い名前ですーーーー", 6, new BigDecimal("13"),
+                            "JPY", "sku-33333")
             };
         BigDecimal subtotal = PayPalItem.getItemTotal(items);
-        BigDecimal shipping = new BigDecimal("7.21");
-        BigDecimal tax = new BigDecimal("4.67");
+        BigDecimal shipping = new BigDecimal("10");
+        BigDecimal tax = new BigDecimal("5");
         PayPalPaymentDetails paymentDetails = new PayPalPaymentDetails(shipping, subtotal, tax);
         BigDecimal amount = subtotal.add(shipping).add(tax);
-        PayPalPayment payment = new PayPalPayment(amount, "USD", "sample item", paymentIntent);
+        PayPalPayment payment = new PayPalPayment(amount, "JPY", "アンドロイド商品", paymentIntent);
         payment.items(items).paymentDetails(paymentDetails);
 
         //--- set other optional fields like invoice_number, custom field, and soft_descriptor
