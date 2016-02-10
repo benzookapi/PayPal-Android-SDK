@@ -1,6 +1,47 @@
 PayPal Android SDK release notes
 ================================
 
+2.13.1
+------
+* Fix issue preventing the SDK from app-switching to newer versions of the PayPal App.
+
+2.13.0
+------
+* Fix sandbox pinning issue [#228](https://github.com/paypal/PayPal-Android-SDK/issues/228).
+* Allow complete removal of card.io dependency, effectively disabling direct credit card payments [#226](https://github.com/paypal/PayPal-Android-SDK/issues/226) & [#234](https://github.com/paypal/PayPal-Android-SDK/issues/234).
+* Update okhttp dependency to 3.0.1.
+* Update card.io to 5.3.0.
+
+2.12.5
+------
+* Update okhttp dependency to 2.7.2.
+* Clean up manifest permissions [#233](https://github.com/paypal/PayPal-Android-SDK/issues/233).
+* Minor bug fixes.
+
+2.12.4
+------
+* Documentation Updates for Maven based integrations.
+* Disabled `allowBackup` in Manifest.
+
+2.12.3
+------
+* SDK is now available at Maven Central [#14](https://github.com/paypal/PayPal-Android-SDK/issues/14) & [#208](https://github.com/paypal/PayPal-Android-SDK/issues/208)
+	* `com.paypal.sdk:paypal-android-sdk:2.12.3`.
+
+2.12.2
+------
+* Enable aar packaging.
+* Ability to push to maven.
+
+2.12.1
+------
+* Fix bug introduced in 2.12.0 that caused older devices to fail prematurely.
+
+2.12.0
+------
+* Allow TLSv1.2 for API 16-19 devices, and add a special error message if PayPal requires TLSv1.2 but the device cannot comply.
+* Add a LogCat warning during PayPalService initialization when an Android version < API 16 (JELLY_BEAN) is detected.
+
 2.11.2
 ------
 * Minor bug fixes.
@@ -16,7 +57,7 @@ PayPal Android SDK release notes
 2.11.0
 ------
 * Target Android 23 (M).
-* Update card.io to 5.1.1 (supports new Android 23 Permissions). Note: this version of card.io contains support for more processor archictures.  Please be sure to grab the entire contents of this SDK, including all up-to-date card.io `*.so` files within the `/libs` folder to ensure that card.io will continue to work on these architectures.
+* Update card.io to 5.1.1 (supports new Android 23 Permissions). Note: this version of card.io contains support for more processor architectures.  Please be sure to grab the entire contents of this SDK, including all up-to-date card.io `*.so` files within the `/libs` folder to ensure that card.io will continue to work on these architectures.
 * Increase minSdkVersion to 11 (HONEYCOMB).
 * Update all networking to use HttpURLConnection instead of Apache's HTTP Client.
 * Set all obfuscated classes to use lower case as a workaround for [an Android Tools issue](https://code.google.com/p/android/issues/detail?id=187210).
@@ -213,7 +254,7 @@ PayPal Android SDK release notes
 
 2.5.2
 -----
-* Update Sample App icons
+* Update Sample App icons.
 * Minor bug fixes.
 
 2.5.1
@@ -228,11 +269,11 @@ PayPal Android SDK release notes
 
 2.4.0
 -----
-* Add [Profile Sharing](https://github.com/paypal/PayPal-Android-SDK/blob/master/docs/profile_sharing_mobile.md) feature 
+* Add [Profile Sharing](https://github.com/paypal/PayPal-Android-SDK/blob/master/docs/profile_sharing_mobile.md) feature.
 	* Developer selects requested account profile attributes
 	* User may consent to sharing the requested profile data
 * Fix sluggish performance in Payment Method selection on devices with slower cameras (Nexus 10).
-* Fix issue [#77: Invalid path on some devices](https://github.com/paypal/PayPal-Android-SDK/issues/77)
+* Fix issue [#77: Invalid path on some devices](https://github.com/paypal/PayPal-Android-SDK/issues/77).
 
 2.3.5
 ----
@@ -240,17 +281,17 @@ PayPal Android SDK release notes
 
 2.3.4
 ----
-* Fixed issue [#83: App freezes when calling startService](https://github.com/paypal/PayPal-Android-SDK/issues/83) for realsies this time.
+* Fix issue [#83: App freezes when calling startService](https://github.com/paypal/PayPal-Android-SDK/issues/83) for realsies this time.
 * Restrict phone/pin login where appropriate.
 
 2.3.3
 ----
-* Fixed issue [#83: App freezes when calling startService](https://github.com/paypal/PayPal-Android-SDK/issues/83)
+* Fix issue [#83: App freezes when calling startService](https://github.com/paypal/PayPal-Android-SDK/issues/83).
 * Minor bug fixes.
 
 2.3.2
 ----
-* Re-add Version class for Cordova backward compatibility
+* Re-add Version class for Cordova backward compatibility.
 
 2.3.1
 ----
@@ -282,7 +323,7 @@ PayPal Android SDK release notes
 
 2.1.0
 -----
-* Add integration with PayPal Wallet App (available only on the Samsung app store)
+* Add integration with PayPal Wallet App (available only on the Samsung app store).
 	* In live environment, if the newly released PayPal Wallet app with authenticator is present on a user's device, the PayPal Wallet app will log the user in to the SDK.
 * Fix issue where some email addresses would not be accepted.
 * Fix some Spanish translations.
@@ -332,7 +373,7 @@ PayPal Android SDK release notes
 
 1.2.4
 -----
-* Fix NumberFormatException on some payments in locales that use comma for decimal separator [34](https://github.com/paypal/PayPal-Android-SDK/issues/34)
+* Fix NumberFormatException on some payments in locales that use comma for decimal separator [34](https://github.com/paypal/PayPal-Android-SDK/issues/34).
 
 1.2.3
 -----
@@ -340,54 +381,51 @@ PayPal Android SDK release notes
 
 1.2.2
 -----
-* Fix login page layout issue [20](https://github.com/paypal/PayPal-Android-SDK/issues/20)
+* Fix login page layout issue [20](https://github.com/paypal/PayPal-Android-SDK/issues/20).
 * Add some login error logging
 
 1.2.1
 -----
-* Update card.io library to 3.1.3
+* Update card.io library to 3.1.3.
 * Fix issue [#11: release/debug UI differences](https://github.com/paypal/PayPal-Android-SDK/issues/11)
 
 1.2.0
 -----
-* Eliminate the final "Complete" screen
-* Fix Hebrew phone settings detection bug
-* Update card.io library to 3.1.2
+* Eliminate the final "Complete" screen.
+* Fix Hebrew phone settings detection bug.
+* Update card.io library to 3.1.2.
 
 1.1.2
 -----
 * Re-add `Version` class
 * Update card.io library to 3.1.1
-* Support all currencies that are curently accepted by the REST APIs.  See [README](README.md) for details.
+* Support all currencies that are currently accepted by the REST APIs.  See [README](README.md) for details.
 * Fix various localizations
 * Additional localization: ko (Korean)
-* Minor UI cleanup (including [issue 4](https://github.com/paypal/PayPal-Android-SDK/issues/4))
+* Minor UI cleanup (including [issue 4](https://github.com/paypal/PayPal-Android-SDK/issues/4)).
 
 1.1.0
 -----
 * Bug fixes
 * Update card.io to 3.1.0
 * Add translations of all strings into ~20 languages, in addition to American English.
-    - Translation choice is controlled by EXTRA_LANGUAGE_OR_LOCALE in PaymentActivity 
+    - Translation choice is controlled by `EXTRA_LANGUAGE_OR_LOCALE` in PaymentActivity.
     - The translations that a few developers had previously created for their own apps will no longer be used by the SDK.
     - NOTE: Default language, if not set by your app, will now be based upon the device's current language setting.
 
-
 1.0.3
 -----
-* Bug fixes
+* Bug fixes.
 
 1.0.2
 -----
-* Several small fixes & improvements
-
+* Several small fixes & improvements.
 
 1.0.1
 -----
-* Update card.io to 3.0.5
-* Minor UI improvements
-* Other small fixes
-
+* Update card.io to 3.0.5.
+* Minor UI improvements.
+* Other small fixes.
 
 1.0.0
 -----

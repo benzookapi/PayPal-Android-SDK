@@ -92,3 +92,5 @@
 # (does not include card.io)
 
 -dontwarn com.google.android.gms.**
+# -- Ignoring warnings from okio based on https://github.com/square/okio/issues/60
+-dontwarn okio.*

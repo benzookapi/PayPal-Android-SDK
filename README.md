@@ -21,6 +21,14 @@ The PayPal Android SDK makes it easy to add PayPal and credit card payments to m
 - [Moving to PayPal Android SDK 2.0](#moving-to-paypal-android-sdk-20)
 - [Next Steps](#next-steps)
 
+## Add the SDK to Your Project
+
+The PayPal Android SDK is now available at [Maven Repository](https://repo1.maven.org/maven2/com/paypal/sdk/paypal-android-sdk/). The latest version is available via `mavenCentral()`.  Just add the following dependency from `mavenCentral()`:
+
+```
+compile 'com.paypal.sdk:paypal-android-sdk:2.13.1'
+```
+
 
 ## Use Cases
 
@@ -71,14 +79,6 @@ The SDK will now use the newest version of the PayPal Wallet App if present on t
 * Android 2.3.3 (API 10) or later
 * Phone or tablet
 
-
-## Add the SDK to Your Project
-
-1. Download or clone this repo. The SDK includes a .jar, static libraries, release notes, and license acknowledgements. It also includes a sample app.
-2. Copy the contents of the SDK `libs` directory into your project's `libs` directory. The path to these files is important; if it is not exactly correct, the SDK will not work.  (_NOTE:_ When using Gradle, copy SDK jar file into your project's `libs` directory, `add as library` to project, and finally copy the SDK folders containing the *.so files into `src/main/jniLibs`.)
-3. Add the open source license acknowledgments from `acknowledgments.md` to your app's acknowledgments.
-
-
 ## Credentials
 
 Your mobile integration requires different `client_id` values for each environment: Live and Test (Sandbox).
@@ -94,6 +94,14 @@ Once logged in on this Applications page, you will be assigned **test credential
 While testing your app, when logging in to PayPal in the SDK's UI you should use a *personal* Sandbox account email and password. I.e., not your Sandbox *business* credentials.
 
 You can create both business and personal Sandbox accounts on the [Sandbox accounts](https://developer.paypal.com/webapps/developer/applications/accounts) page.
+
+#### Sandbox and TLSv1.2
+
+PayPal will be upgrading the endpoint that the PayPal Android SDK uses to communicate with PayPal servers on Jan 18th, 2016.  If you're testing on sandbox with a version of the PayPal Android SDK older than 2.13.0, then you'll start seeing communication failures when using Android devices >= API 16, and < API 20.  Please upgrade to a version [2.13.0](https://github.com/paypal/PayPal-Android-SDK/releases) or higher to fix these errors.
+
+If you're testing on a device older than API 16, Android will not be able to communicate with PayPal, no matter what version of the SDK you use.
+
+These TLS changes coincides with the TLSv1.2 security mandate outlined [here](https://www.paypal-knowledge.com/infocenter/index?page=content&widgetview=true&id=FAQ1914&viewlocale=en_US), and will be followed by a similar change to the Production endpoints at some later date.  For any questions or concerns, please [create an issue](https://github.com/paypal/PayPal-Android-SDK/issues/).
 
 ### Live
 
@@ -117,11 +125,45 @@ If your app initiates a transaction with a currency that turns out to be unsuppo
 
 ## Disabling card.io card scanning
 
-Future payments does not require card.io card scanning, so it is safe to remove the camera scanner libraries by removing the following folders within the `lib` directory: `arm64-v8a`, `armeabi`, `armeabi-v7a`, `mips`, `x86`, `x86_64`.
-
-Single Payments can be configured to accept credit cards through manual entry, but without card scanning.  To do so, remove the same libs above, and remove `android.permission.CAMERA` and `android.permission.VIBRATE` permissions from `AndroidManifest.xml`.  If you wish to disable credit card support altogether, follow the above steps to reduce the permissions and sdk footprint, and add the following to the `PayPalConfiguration` initialization:
+Future payments does not require card.io card scanning. Also, for single payments, if you do not wish to include the scanning feature of Card.io, and only allow manual entry by keyboard, add packagingOptions to remove the .so libraries of card.io as shown below in build.gradle:
 ```
-config.acceptCreditCards(false);
+packagingOptions {
+    exclude 'lib/arm64-v8a/libcardioDecider.so'
+    exclude 'lib/arm64-v8a/libcardioRecognizer.so'
+    exclude 'lib/arm64-v8a/libcardioRecognizer_tegra2.so'
+    exclude 'lib/arm64-v8a/libopencv_core.so'
+    exclude 'lib/arm64-v8a/libopencv_imgproc.so'
+    exclude 'lib/armeabi/libcardioDecider.so'
+    exclude 'lib/armeabi-v7a/libcardioDecider.so'
+    exclude 'lib/armeabi-v7a/libcardioRecognizer.so'
+    exclude 'lib/armeabi-v7a/libcardioRecognizer_tegra2.so'
+    exclude 'lib/armeabi-v7a/libopencv_core.so'
+    exclude 'lib/armeabi-v7a/libopencv_imgproc.so'
+    exclude 'lib/mips/libcardioDecider.so'
+    exclude 'lib/x86/libcardioDecider.so'
+    exclude 'lib/x86/libcardioRecognizer.so'
+    exclude 'lib/x86/libcardioRecognizer_tegra2.so'
+    exclude 'lib/x86/libopencv_core.so'
+    exclude 'lib/x86/libopencv_imgproc.so'
+    exclude 'lib/x86_64/libcardioDecider.so'
+    exclude 'lib/x86_64/libcardioRecognizer.so'
+    exclude 'lib/x86_64/libcardioRecognizer_tegra2.so'
+    exclude 'lib/x86_64/libopencv_core.so'
+    exclude 'lib/x86_64/libopencv_imgproc.so'
+}
+```
+
+## Disabling Credit Card Payments Completely
+
+If you want to disable credit card completely:
+
+1. Exclude card.io library in your application build.gradle file:
+```
+dependencies {
+    compile('com.paypal.sdk:paypal-android-sdk:2.13.1') {
+        exclude group: 'io.card'
+    }
+}
 ```
 
 ## Testing
